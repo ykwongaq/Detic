@@ -1,0 +1,30 @@
+_BASE_: "Base-C2_L_R5021k_640b64_4x_intra.yaml"
+MODEL:
+  ROI_BOX_HEAD:
+    USE_ZEROSHOT_CLS: True
+    IMAGE_LABEL_LOSS: 'max_size'
+  BACKBONE:
+    NAME: build_swintransformer_fpn_backbone
+  SWIN:
+    SIZE: B-22k
+  FPN:
+    IN_FEATURES: ["swin1", "swin2", "swin3"]
+  WEIGHTS: "models/Detic_LbaseI_CLIP_SwinB_896b32_4x_ft4x_max-size.pth"
+#  WEIGHTS: "models/BoxSup-C2_Lbase_CLIP_SwinB_896b32_4x.pth"
+SOLVER:
+  MAX_ITER: 50000
+  IMS_PER_BATCH: 32
+  BASE_LR: 0.0001
+  WARMUP_ITERS: 1000
+  WARMUP_FACTOR: 0.001
+  CHECKPOINT_PERIOD: 5000
+#DATASETS:
+#  TRAIN: ("lvis_v1_train_norare","imagenet_lvis_v1")
+DATASETS:
+  TRAIN: ("marinedet_v2_intra_class_train",)
+  # TEST: ("marinedet_v2_intra_class_val",)
+DATALOADER:
+  SAMPLER_TRAIN: "TrainingSampler"
+  DATASET_ANN: ["box"]
+  NUM_WORKERS: 16
+WITH_IMAGE_LABELS: False

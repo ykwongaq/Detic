@@ -16,7 +16,7 @@ MODEL:
     NAME: DeticCascadeROIHeads
     IN_FEATURES: ["p3", "p4", "p5"]
     IOU_THRESHOLDS: [0.6]
-    NUM_CLASSES: 24
+    NUM_CLASSES: 555
     SCORE_THRESH_TEST: 0.02
     NMS_THRESH_TEST: 0.5
   ROI_BOX_CASCADE_HEAD:
@@ -27,12 +27,12 @@ MODEL:
     POOLER_RESOLUTION: 7
     CLS_AGNOSTIC_BBOX_REG: True
     MULT_PROPOSAL_SCORE: True
-    FC_DIM: 25 # Added by david
+    FC_DIM: 556 # Added by david
     USE_SIGMOID_CE: True
     USE_FED_LOSS: True
     ZEROSHOT_WEIGHT_PATH: rand
-    CAT_FREQ_PATH: 'datasets/metadata/class_level_train_cat_info.json'
-    FED_LOSS_NUM_CAT: 24
+    CAT_FREQ_PATH: 'datasets/metadata/intra_class_train_info.json'
+    FED_LOSS_NUM_CAT: 555
     # CAT_FREQ_PATH: ''
 
   ROI_MASK_HEAD:
@@ -41,7 +41,7 @@ MODEL:
     POOLER_RESOLUTION: 14
     CLS_AGNOSTIC_MASK: True
   CENTERNET:
-    NUM_CLASSES: 24
+    NUM_CLASSES: 555
     REG_WEIGHT: 1.
     NOT_NORM_REG: True
     ONLY_PROPOSAL: True
